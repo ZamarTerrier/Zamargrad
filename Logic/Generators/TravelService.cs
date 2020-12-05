@@ -131,6 +131,8 @@ namespace Zamargrad.Logic.Generators
 
             player.fight = true;
 
+            await AttackEnemy(Context);
+
         }
         //Стартуем удар
         public static async Task AttackEnemy(SocketCommandContext Context)
