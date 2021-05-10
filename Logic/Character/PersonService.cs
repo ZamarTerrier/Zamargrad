@@ -65,7 +65,7 @@ namespace Zamargrad.Logic.Character
 
             foreach (KeyValuePair<string, Item> kp in invent)
             {
-                inv += kp.Key + "\n";
+                inv += kp.Key + " : " + kp.Value.count + " шт.\n";
             }
 
             if (inv == string.Empty)
@@ -181,7 +181,13 @@ namespace Zamargrad.Logic.Character
 
                     useItem.HealthRegen(ply);
 
+
                     await Loging.Log(Context.User.Username + " берет в руки " + useItem.name + " и выпивает.", Context.Channel);
+
+                    if (useItem.count > 1)
+                        useItem.count--;
+                    else
+                        ply.items.Remove(text);
 
                 }
                 else if (i.type == Items.Item.itemType.ManaFlask)
@@ -191,6 +197,11 @@ namespace Zamargrad.Logic.Character
                     useItem.ManaRegen(ply);
 
                     await Loging.Log(Context.User.Username + " берет в руки " + useItem.name + " и выпивает.", Context.Channel);
+
+                    if (useItem.count > 1)
+                        useItem.count--;
+                    else
+                        ply.items.Remove(text);
 
                 }
                 else

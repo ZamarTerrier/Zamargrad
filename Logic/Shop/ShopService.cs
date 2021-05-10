@@ -55,7 +55,15 @@ namespace Zamargrad.Logic.Shop
                 if(ply.money >= items[i].cost)
                 {
                     ply.money -= items[i].cost;
-                    ply.items.Add(items[i].name, items[i]);
+                    bool added = ply.items.TryAdd(items[i].name, items[i]);
+
+                    if (!added)
+                        ply.items[items[i].name].count++;
+                    else
+                        ply.items[items[i].name].count = 1;
+
+
+
                     await Loging.Log(ply.name + " приобретает " + items[i].name, Context.Channel);
                 }
                 else

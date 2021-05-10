@@ -9,6 +9,10 @@ namespace Zamargrad.Logic.Items
         public enum itemType {
             Decor,
             Use,
+            Ore,
+            Meat,
+            Skin,
+            Timber,
             ManaFlask,
             HealthFlask
         }
@@ -17,11 +21,13 @@ namespace Zamargrad.Logic.Items
         public string name;
         public string description;
         public int cost;
+        public int count;
 
         public Item(itemType type, string name, string description)
         {
             this.type = type;
             this.name = name;
+
 
             switch (type)
             {
@@ -30,6 +36,9 @@ namespace Zamargrad.Logic.Items
                     break;
                 case itemType.Use:
                     this.description = "Используемый предмет\n" + "Описание : " + description;
+                    break;
+                default:
+                    this.description = "Описание : " + description;
                     break;
             }
         }
